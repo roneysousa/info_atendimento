@@ -1,0 +1,1169 @@
+object frmConsultaCliente: TfrmConsultaCliente
+  Left = 192
+  Top = 122
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Consulta'
+  ClientHeight = 519
+  ClientWidth = 684
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 684
+    Height = 70
+    Align = alTop
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 13
+      Top = 15
+      Width = 32
+      Height = 13
+      Caption = '&Cliente'
+      FocusControl = dbeCDCLIE
+      Transparent = True
+    end
+    object spLocCliente: TSpeedButton
+      Left = 102
+      Top = 30
+      Width = 23
+      Height = 22
+      Hint = 'Localizar cliente'
+      Flat = True
+      Glyph.Data = {
+        F6000000424DF600000000000000760000002800000010000000100000000100
+        0400000000008000000000000000000000001000000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00777777777777
+        7777777777777777777777770077777777777770FF077777777777077FF07777
+        7777770777FF077777777770777FFF00777777790777F1111077777790771117
+        0B77777770799170B77777777709990B77777777770990B77777777777090B77
+        777777777770B777777777777777777777777777777777777777}
+      OnClick = spLocClienteClick
+    end
+    object dbeCDCLIE: TEdit
+      Left = 13
+      Top = 31
+      Width = 89
+      Height = 21
+      TabOrder = 0
+      OnChange = dbeCDCLIEChange
+      OnExit = dbeCDCLIEExit
+      OnKeyPress = dbeCDCLIEKeyPress
+    end
+    object edtNMCLIE: TEdit
+      Left = 133
+      Top = 31
+      Width = 361
+      Height = 21
+      TabStop = False
+      CharCase = ecUpperCase
+      Color = clSilver
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlue
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 1
+    end
+    object btnConsulta: TBitBtn
+      Left = 520
+      Top = 27
+      Width = 75
+      Height = 25
+      Caption = '&Consultar'
+      TabOrder = 2
+      OnClick = btnConsultaClick
+      Glyph.Data = {
+        F6000000424DF600000000000000760000002800000010000000100000000100
+        0400000000008000000000000000000000001000000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00777777777777
+        7777777777777777777744444777774444474B444777774B44474B444777774B
+        4447444444474444444744B444444B44444744B444744B44444744B444744B44
+        44477444444444444477774B44474B4447777744444744444777777444777444
+        77777774B47774B4777777744477744477777777777777777777}
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 70
+    Width = 684
+    Height = 408
+    Align = alClient
+    TabOrder = 1
+    object PageControl1: TPageControl
+      Left = 1
+      Top = 1
+      Width = 682
+      Height = 406
+      ActivePage = TabSheet2
+      Align = alClient
+      TabOrder = 0
+      object TabSheet1: TTabSheet
+        Caption = '&Atendimentos'
+        object pnlGridAtendimento: TPanel
+          Left = 0
+          Top = 0
+          Width = 674
+          Height = 167
+          Align = alTop
+          TabOrder = 0
+          object grdConsultar: TDBGrid
+            Left = 1
+            Top = 1
+            Width = 638
+            Height = 165
+            Align = alClient
+            Ctl3D = False
+            DataSource = dsAtendimento
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            ParentCtl3D = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 0
+            TitleFont.Charset = ANSI_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'AGE_DTATENDIMENTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Data'
+                Title.Font.Charset = ANSI_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Verdana'
+                Title.Font.Style = [fsBold]
+                Width = 68
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'AGE_HOATENDIMENTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Hora'
+                Title.Font.Charset = ANSI_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Verdana'
+                Title.Font.Style = [fsBold]
+                Width = 43
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CLI_NOME'
+                Title.Caption = 'Cliente'
+                Title.Font.Charset = ANSI_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Verdana'
+                Title.Font.Style = [fsBold]
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'FUN_NOME'
+                Title.Caption = 'Funcion'#225'rio'
+                Title.Font.Charset = ANSI_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Verdana'
+                Title.Font.Style = [fsBold]
+                Visible = True
+              end>
+          end
+          object Panel4: TPanel
+            Left = 639
+            Top = 1
+            Width = 34
+            Height = 165
+            Align = alRight
+            TabOrder = 1
+            object sbProximo: TSpeedButton
+              Left = 5
+              Top = 83
+              Width = 25
+              Height = 35
+              Hint = 'Pr'#243'ximo registro'
+              Enabled = False
+              Flat = True
+              Glyph.Data = {
+                76060000424D7606000000000000360400002800000018000000180000000100
+                0800000000004002000000000000000000000001000000000000FFFFFF00FFE6
+                E600FEE5E500FCE3E300FBE1E100F9DFE000F7DDDE00F7DDDD00F5DBDB00F4DB
+                DB00F2D9D900E6D9D900F0D6D700EED4D400EBD2D200E9D0D000E9CFD000E7CD
+                CD00E5CBCB00E3C9C900E0C7C700DEC4C400DCC2C200CCC0C000D9C0BF00D7BE
+                BD00D4BBBB00D3B9B900D0B7B700CFB5B500CEB4B400CCB3B300C9B0B000C7AE
+                AE00C5ACAC00C3AAAA00C1A8A800C1A7A700BFA5A500BDA3A300BCA3A300BAA0
+                A100BAA1A000B89E9E00B59C9C00B39A9A00AF969600AD949400A88F8F00A68D
+                8D00A18888009F8686009B8382009A818100998080006633330000000000C0C0
+                C000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000393939393939
+                3939393939393939393939393939393939393939393939393939393939393939
+                3939393939393939393939393939393939393939393939393939393939393939
+                3939393939393939393939393939393939393939393939393939393939393939
+                3939393939393939393939393939393939393939393939393939393939003939
+                3939393939393939393939393939393939393939000037393939393939393939
+                39393939393939393939390000370D3839393939393939393939393939393939
+                39390000370D260D383939393939393939393939393939393900003706260D2E
+                1138393939393939393939393939393900003706260D2C112E15383939393939
+                3939393939393900003705210D2B112E15311938393939393939393939390000
+                3706210D261038143019331D383939393939393939000037012106260D383938
+                18331D331D38393939393939000037012106260D3839393938193321331D3839
+                393939393937011D05250C3839393939393821331D170B383939393939393801
+                25063839393939393939381D170B383939393939393939380638393939393939
+                393939380B383939393939393939393938393939393939393939393938393939
+                3939393939393939393939393939393939393939393939393939393939393939
+                3939393939393939393939393939393939393939393939393939393939393939
+                3939393939393939393939393939393939393939393939393939393939393939
+                3939393939393939393939393939393939393939393939393939}
+              ParentShowHint = False
+              ShowHint = True
+              OnClick = sbProximoClick
+            end
+            object sbUltimo: TSpeedButton
+              Left = 5
+              Top = 122
+              Width = 25
+              Height = 35
+              Hint = #218'ltimo registro'
+              Enabled = False
+              Flat = True
+              Glyph.Data = {
+                96010000424D9601000000000000760000002800000018000000180000000100
+                0400000000002001000000000000000000001000000000000000FFFFFF006130
+                30006E3D3D00916161009E6E6E00C2919100CF9E9E00C0C0C000000000000000
+                0000000000000000000000000000000000000000000000000000777777777777
+                7777777777777777777777777777777777777777777777777777777777777777
+                7777777777777777777777777777777077777777777777777777770027777777
+                7777777777777002327777777777777777770023432777777777777777700234
+                3432777777777777770023434343277777777777700234343434327777777777
+                0025656565656547777777700256565656565654777777772121212121212121
+                2777777777777777777777777777777000000000000000007777777034343434
+                3434343617777770456565656565656527777770365656565656565617777770
+                4565656565656565277777771212121212121212177777777777777777777777
+                7777777777777777777777777777777777777777777777777777}
+              ParentShowHint = False
+              ShowHint = True
+              OnClick = sbUltimoClick
+            end
+            object sbAnterior: TSpeedButton
+              Left = 5
+              Top = 44
+              Width = 25
+              Height = 35
+              Hint = 'Registro anterior'
+              Enabled = False
+              Flat = True
+              Glyph.Data = {
+                76060000424D7606000000000000360400002800000018000000180000000100
+                0800000000004002000000000000000000000001000000000000FFFFFF00FEE5
+                E400FDE3E300FBE1E100F9DFE000F7DEDD00F4DBDB00F2D9D900E6D9D900F0D7
+                D700EED4D400EBD2D200E9CFCF00E7CECD00E5CBCB00E3C9C900E0C6C700DEC4
+                C500DBC2C200D9C0C000CDC0C000CCC0C000D7BDBD00D5BBBB00D3B9B900D1B7
+                B700CFB6B500CFB5B500CDB4B400CCB3B300C7AEAE00C6ACAC00C1A8A800BFA6
+                A600BAA0A100B89E9E00B39A9A00B1989800AD949400AA919100A68D8D00A38A
+                8A009F8686009D8484009C8283009A818100998080006633330000000000C0C0
+                C000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000313131313131
+                3131313131313131313131313131313131313131313131313131313131313131
+                3131313131313131313131313131313131313131313131313131313131313131
+                3131313131313131313131313131313131313131313131313131313131313131
+                3131313131313131313131313131313131313131313131003131313131313131
+                313131003131313131313131313100002F31313131313131313100002F313131
+                313131313100002F01303131313131313100002F1A3031313131313100002F01
+                1E0530313131313100002F1A2A1A303131313131312F011E05210A3031313100
+                002F1E2A1A1408303131313131313004210A230D303100002F1E2A1A14083031
+                313131313131313005210D241130002F1A2A1A16083031313131313131313131
+                300A240D26162F1A2A1A140830313131313131313131313131300D2611281A2A
+                1A1408303131313131313131313131313131301128162A1A1408303131313131
+                313131313131313131313130162A1A1408303131313131313131313131313131
+                3131313130191408303131313131313131313131313131313131313131300830
+                3131313131313131313131313131313131313131313130313131313131313131
+                3131313131313131313131313131313131313131313131313131313131313131
+                3131313131313131313131313131313131313131313131313131313131313131
+                3131313131313131313131313131313131313131313131313131313131313131
+                3131313131313131313131313131313131313131313131313131}
+              ParentShowHint = False
+              ShowHint = True
+              OnClick = sbAnteriorClick
+            end
+            object sbPrimeiro: TSpeedButton
+              Left = 5
+              Top = 6
+              Width = 25
+              Height = 35
+              Hint = 'Primeiro registro'
+              Enabled = False
+              Flat = True
+              Glyph.Data = {
+                96010000424D9601000000000000760000002800000018000000180000000100
+                0400000000002001000000000000000000001000000000000000FFFFFF006130
+                30006E3D3D00916161009E6E6E00C2919100CF9E9E00C0C0C000000000000000
+                0000000000000000000000000000000000000000000000000000777777777777
+                7777777777777777777777777777777777777777777777777777777777777770
+                0000000000000000777777703434343434343436177777704565656565656565
+                2777777036565656565656561777777045656565656565652777777712121212
+                1212121217777777777777777777777777777777777777777777777777777770
+                0000000000000000777777771212121212121212177777777143434343434341
+                7777777777143434343656177777777777714343436561777777777777771434
+                3656177777777777777771436561777777777777777777165617777777777777
+                7777777161777777777777777777777717777777777777777777777777777777
+                7777777777777777777777777777777777777777777777777777}
+              ParentShowHint = False
+              ShowHint = True
+              OnClick = sbPrimeiroClick
+            end
+          end
+        end
+        object pnlDiagnostico: TPanel
+          Left = 0
+          Top = 167
+          Width = 674
+          Height = 211
+          Align = alClient
+          TabOrder = 1
+          object Label2: TLabel
+            Left = 351
+            Top = 8
+            Width = 99
+            Height = 13
+            Caption = 'Tratamento realizado'
+            FocusControl = DBMemo1
+          end
+          object Label3: TLabel
+            Left = 16
+            Top = 8
+            Width = 51
+            Height = 13
+            Caption = 'Diagnotico'
+            FocusControl = DBMemo2
+          end
+          object DBMemo1: TDBMemo
+            Left = 351
+            Top = 27
+            Width = 290
+            Height = 166
+            DataField = 'AGE_DESCRICAO'
+            DataSource = dsAtendimento
+            ScrollBars = ssVertical
+            TabOrder = 0
+          end
+          object DBMemo2: TDBMemo
+            Left = 16
+            Top = 27
+            Width = 290
+            Height = 166
+            DataField = 'AGE_DIAGNOSTICO'
+            DataSource = dsAtendimento
+            ScrollBars = ssVertical
+            TabOrder = 1
+          end
+        end
+      end
+      object TabSheet2: TTabSheet
+        Caption = 'Vendas'
+        ImageIndex = 1
+        object pnlGridVendas: TPanel
+          Left = 0
+          Top = 0
+          Width = 674
+          Height = 167
+          Align = alTop
+          TabOrder = 0
+          object Panel5: TPanel
+            Left = 639
+            Top = 1
+            Width = 34
+            Height = 165
+            Align = alRight
+            TabOrder = 0
+            object sbProximo2: TSpeedButton
+              Left = 5
+              Top = 83
+              Width = 25
+              Height = 35
+              Hint = 'Pr'#243'ximo registro'
+              Enabled = False
+              Flat = True
+              Glyph.Data = {
+                76060000424D7606000000000000360400002800000018000000180000000100
+                0800000000004002000000000000000000000001000000000000FFFFFF00FFE6
+                E600FEE5E500FCE3E300FBE1E100F9DFE000F7DDDE00F7DDDD00F5DBDB00F4DB
+                DB00F2D9D900E6D9D900F0D6D700EED4D400EBD2D200E9D0D000E9CFD000E7CD
+                CD00E5CBCB00E3C9C900E0C7C700DEC4C400DCC2C200CCC0C000D9C0BF00D7BE
+                BD00D4BBBB00D3B9B900D0B7B700CFB5B500CEB4B400CCB3B300C9B0B000C7AE
+                AE00C5ACAC00C3AAAA00C1A8A800C1A7A700BFA5A500BDA3A300BCA3A300BAA0
+                A100BAA1A000B89E9E00B59C9C00B39A9A00AF969600AD949400A88F8F00A68D
+                8D00A18888009F8686009B8382009A818100998080006633330000000000C0C0
+                C000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000393939393939
+                3939393939393939393939393939393939393939393939393939393939393939
+                3939393939393939393939393939393939393939393939393939393939393939
+                3939393939393939393939393939393939393939393939393939393939393939
+                3939393939393939393939393939393939393939393939393939393939003939
+                3939393939393939393939393939393939393939000037393939393939393939
+                39393939393939393939390000370D3839393939393939393939393939393939
+                39390000370D260D383939393939393939393939393939393900003706260D2E
+                1138393939393939393939393939393900003706260D2C112E15383939393939
+                3939393939393900003705210D2B112E15311938393939393939393939390000
+                3706210D261038143019331D383939393939393939000037012106260D383938
+                18331D331D38393939393939000037012106260D3839393938193321331D3839
+                393939393937011D05250C3839393939393821331D170B383939393939393801
+                25063839393939393939381D170B383939393939393939380638393939393939
+                393939380B383939393939393939393938393939393939393939393938393939
+                3939393939393939393939393939393939393939393939393939393939393939
+                3939393939393939393939393939393939393939393939393939393939393939
+                3939393939393939393939393939393939393939393939393939393939393939
+                3939393939393939393939393939393939393939393939393939}
+              ParentShowHint = False
+              ShowHint = True
+              OnClick = sbProximo2Click
+            end
+            object sbUltimo2: TSpeedButton
+              Left = 5
+              Top = 122
+              Width = 25
+              Height = 35
+              Hint = #218'ltimo registro'
+              Enabled = False
+              Flat = True
+              Glyph.Data = {
+                96010000424D9601000000000000760000002800000018000000180000000100
+                0400000000002001000000000000000000001000000000000000FFFFFF006130
+                30006E3D3D00916161009E6E6E00C2919100CF9E9E00C0C0C000000000000000
+                0000000000000000000000000000000000000000000000000000777777777777
+                7777777777777777777777777777777777777777777777777777777777777777
+                7777777777777777777777777777777077777777777777777777770027777777
+                7777777777777002327777777777777777770023432777777777777777700234
+                3432777777777777770023434343277777777777700234343434327777777777
+                0025656565656547777777700256565656565654777777772121212121212121
+                2777777777777777777777777777777000000000000000007777777034343434
+                3434343617777770456565656565656527777770365656565656565617777770
+                4565656565656565277777771212121212121212177777777777777777777777
+                7777777777777777777777777777777777777777777777777777}
+              ParentShowHint = False
+              ShowHint = True
+              OnClick = sbUltimo2Click
+            end
+            object sbAnterior2: TSpeedButton
+              Left = 5
+              Top = 44
+              Width = 25
+              Height = 35
+              Hint = 'Registro anterior'
+              Enabled = False
+              Flat = True
+              Glyph.Data = {
+                76060000424D7606000000000000360400002800000018000000180000000100
+                0800000000004002000000000000000000000001000000000000FFFFFF00FEE5
+                E400FDE3E300FBE1E100F9DFE000F7DEDD00F4DBDB00F2D9D900E6D9D900F0D7
+                D700EED4D400EBD2D200E9CFCF00E7CECD00E5CBCB00E3C9C900E0C6C700DEC4
+                C500DBC2C200D9C0C000CDC0C000CCC0C000D7BDBD00D5BBBB00D3B9B900D1B7
+                B700CFB6B500CFB5B500CDB4B400CCB3B300C7AEAE00C6ACAC00C1A8A800BFA6
+                A600BAA0A100B89E9E00B39A9A00B1989800AD949400AA919100A68D8D00A38A
+                8A009F8686009D8484009C8283009A818100998080006633330000000000C0C0
+                C000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000313131313131
+                3131313131313131313131313131313131313131313131313131313131313131
+                3131313131313131313131313131313131313131313131313131313131313131
+                3131313131313131313131313131313131313131313131313131313131313131
+                3131313131313131313131313131313131313131313131003131313131313131
+                313131003131313131313131313100002F31313131313131313100002F313131
+                313131313100002F01303131313131313100002F1A3031313131313100002F01
+                1E0530313131313100002F1A2A1A303131313131312F011E05210A3031313100
+                002F1E2A1A1408303131313131313004210A230D303100002F1E2A1A14083031
+                313131313131313005210D241130002F1A2A1A16083031313131313131313131
+                300A240D26162F1A2A1A140830313131313131313131313131300D2611281A2A
+                1A1408303131313131313131313131313131301128162A1A1408303131313131
+                313131313131313131313130162A1A1408303131313131313131313131313131
+                3131313130191408303131313131313131313131313131313131313131300830
+                3131313131313131313131313131313131313131313130313131313131313131
+                3131313131313131313131313131313131313131313131313131313131313131
+                3131313131313131313131313131313131313131313131313131313131313131
+                3131313131313131313131313131313131313131313131313131313131313131
+                3131313131313131313131313131313131313131313131313131}
+              ParentShowHint = False
+              ShowHint = True
+              OnClick = sbAnterior2Click
+            end
+            object sbPrimeiro2: TSpeedButton
+              Left = 5
+              Top = 6
+              Width = 25
+              Height = 35
+              Hint = 'Primeiro registro'
+              Enabled = False
+              Flat = True
+              Glyph.Data = {
+                96010000424D9601000000000000760000002800000018000000180000000100
+                0400000000002001000000000000000000001000000000000000FFFFFF006130
+                30006E3D3D00916161009E6E6E00C2919100CF9E9E00C0C0C000000000000000
+                0000000000000000000000000000000000000000000000000000777777777777
+                7777777777777777777777777777777777777777777777777777777777777770
+                0000000000000000777777703434343434343436177777704565656565656565
+                2777777036565656565656561777777045656565656565652777777712121212
+                1212121217777777777777777777777777777777777777777777777777777770
+                0000000000000000777777771212121212121212177777777143434343434341
+                7777777777143434343656177777777777714343436561777777777777771434
+                3656177777777777777771436561777777777777777777165617777777777777
+                7777777161777777777777777777777717777777777777777777777777777777
+                7777777777777777777777777777777777777777777777777777}
+              ParentShowHint = False
+              ShowHint = True
+              OnClick = sbPrimeiro2Click
+            end
+          end
+          object DBGrid1: TDBGrid
+            Left = 1
+            Top = 1
+            Width = 638
+            Height = 165
+            Align = alClient
+            Ctl3D = False
+            DataSource = dsVendas
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            ParentCtl3D = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 1
+            TitleFont.Charset = ANSI_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'MOV_PEDIDO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Venda'
+                Title.Font.Charset = ANSI_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Verdana'
+                Title.Font.Style = [fsBold]
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MOV_DATAVENDA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Data'
+                Title.Font.Charset = ANSI_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Verdana'
+                Title.Font.Style = [fsBold]
+                Width = 74
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CLI_NOME'
+                Title.Caption = 'Cliente'
+                Title.Font.Charset = ANSI_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Verdana'
+                Title.Font.Style = [fsBold]
+                Width = 326
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MOV_VALOR'
+                Title.Alignment = taRightJustify
+                Title.Caption = 'Valor Venda'
+                Title.Font.Charset = ANSI_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Verdana'
+                Title.Font.Style = [fsBold]
+                Width = 93
+                Visible = True
+              end>
+          end
+        end
+        object pnlGridItensVenda: TPanel
+          Left = 0
+          Top = 167
+          Width = 674
+          Height = 211
+          Align = alClient
+          TabOrder = 1
+          object DBNavigator1: TDBNavigator
+            Left = 1
+            Top = 185
+            Width = 672
+            Height = 25
+            DataSource = dsItensVenda
+            VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+            Align = alBottom
+            TabOrder = 0
+          end
+          object Panel6: TPanel
+            Left = 1
+            Top = 1
+            Width = 672
+            Height = 24
+            Align = alTop
+            Alignment = taLeftJustify
+            BorderStyle = bsSingle
+            Caption = '>> Itens da Venda'
+            Color = clSilver
+            TabOrder = 1
+          end
+          object dbGridItensVendas: TDBGrid
+            Left = 1
+            Top = 25
+            Width = 672
+            Height = 160
+            Align = alClient
+            Ctl3D = False
+            DataSource = dsItensVenda
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            ParentCtl3D = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 2
+            TitleFont.Charset = ANSI_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'MOP_NRITEM'
+                Title.Alignment = taCenter
+                Title.Caption = 'Item'
+                Title.Font.Charset = ANSI_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Verdana'
+                Title.Font.Style = [fsBold]
+                Width = 36
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'PRO_DESCRICAO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Descri'#231#227'o'
+                Title.Font.Charset = ANSI_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Verdana'
+                Title.Font.Style = [fsBold]
+                Width = 274
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MOP_UNIDADE'
+                Title.Caption = 'UND'
+                Title.Font.Charset = ANSI_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Verdana'
+                Title.Font.Style = [fsBold]
+                Width = 32
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MOP_QUANTIDADE'
+                Title.Caption = 'Quantidade'
+                Title.Font.Charset = ANSI_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Verdana'
+                Title.Font.Style = [fsBold]
+                Width = 78
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MOP_VALOR'
+                Title.Alignment = taRightJustify
+                Title.Caption = 'Valor Unit'#225'rio'
+                Title.Font.Charset = ANSI_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Verdana'
+                Title.Font.Style = [fsBold]
+                Width = 98
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'SUB_TOTAL'
+                Title.Alignment = taRightJustify
+                Title.Caption = 'Sub-Total'
+                Title.Font.Charset = ANSI_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Verdana'
+                Title.Font.Style = [fsBold]
+                Width = 79
+                Visible = True
+              end>
+          end
+        end
+      end
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 478
+    Width = 684
+    Height = 41
+    Align = alBottom
+    Color = clNavy
+    TabOrder = 2
+    object BtSair: TBitBtn
+      Left = 586
+      Top = 8
+      Width = 75
+      Height = 25
+      Hint = 'Fechar janela'
+      Caption = '&Fechar'
+      TabOrder = 0
+      OnClick = BtSairClick
+      Glyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
+        FF00FFFF00FFFF00FFFF00FFFF00FF824B4B4E1E1FFF00FFFF00FFFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF824B4B824B4BA64B4BA9
+        4D4D4E1E1FFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+        824B4B824B4BB64F50C24F50C54D4EB24D4E4E1E1F824B4B824B4B824B4B824B
+        4B824B4B824B4BFF00FFFF00FFFF00FF824B4BD45859CB5556C95455C95253B7
+        4F524E1E1FFE8B8CFB9A9CF8AAABF7B5B6F7B5B6824B4BFF00FFFF00FFFF00FF
+        824B4BD75C5DD05A5BCF595ACF5758BD53564E1E1F23B54A13C14816BD480CBC
+        41F7B5B6824B4BFF00FFFF00FFFF00FF824B4BDD6364D75F60D55E5FD55C5DC2
+        575A4E1E1F2AB44D1CBF4C1EBC4C13BC45F7B5B6824B4BFF00FFFF00FFFF00FF
+        824B4BE36869DD6566DA6364DE6667C6595B4E1E1F26B14916BC481BBB4910BB
+        43F7B5B6824B4BFF00FFFF00FFFF00FF824B4BEB6D6EE26768E67E7FFAD3D4CC
+        6E704E1E1FA5D89750D16F42C9662DC758F7B5B6824B4BFF00FFFF00FFFF00FF
+        824B4BF27374E96C6DEB8182FCD1D3CF6E704E1E1FFFF2CCFFFFD7FFFFD4E6FC
+        C7F7B5B6824B4BFF00FFFF00FFFF00FF824B4BF87879F07576EE7273F07374D1
+        65664E1E1FFCEFC7FFFFD5FFFFD3FFFFD7F7B5B6824B4BFF00FFFF00FFFF00FF
+        824B4BFE7F80F77A7BF6797AF77779D76B6B4E1E1FFCEFC7FFFFD5FFFFD3FFFF
+        D5F7B5B6824B4BFF00FFFF00FFFF00FF824B4BFF8384FC7F80FB7E7FFE7F80DA
+        6E6F4E1E1FFCEFC7FFFFD5FFFFD3FFFFD5F7B5B6824B4BFF00FFFF00FFFF00FF
+        824B4BFF8889FF8283FF8182FF8283E073744E1E1FFCEFC7FFFFD5FFFFD3FFFF
+        D5F7B5B6824B4BFF00FFFF00FFFF00FF824B4B824B4BE27576FE8182FF8687E5
+        76774E1E1FFAEBC5FCFBD1FCFBCFFCFBD1F7B5B6824B4BFF00FFFF00FFFF00FF
+        FF00FFFF00FF824B4B9C5657CB6C6DCF6E6E4E1E1F824B4B824B4B824B4B824B
+        4B824B4B824B4BFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF824B4B82
+        4B4B4E1E1FFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+    end
+  end
+  object dstAtendimentos: TSQLDataSet
+    CommandText = 
+      'Select A.AGE_ID, AGE_CDLOJA, A.AGE_DTMOVI, A.AGE_HOMOVI, A.AGE_C' +
+      'LIENTE,'#13#10'A.AGE_DTATENDIMENTO, A.AGE_HOATENDIMENTO, A.AGE_SITUACA' +
+      'O,'#13#10'A.AGE_FUNCIONARIO, A.AGE_DESCRICAO, A.AGE_DIAGNOSTICO,'#13#10'CL.C' +
+      'LI_NOME, F.FUN_NOME'#13#10'FROM AGENDA A'#13#10'inner join CLIENTES CL ON CL' +
+      '.CLI_CODIGO = A.AGE_CLIENTE'#13#10'inner join FUNCIONARIOS F ON F.FUN_' +
+      'CODIGO = A.AGE_FUNCIONARIO'#13#10'Where (A.age_cdloja = :pLOJA ) and (' +
+      'A.AGE_CLIENTE = :pCLIENTE)'#13#10'AND (A.AGE_SITUACAO = :pSITUACAO)'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'pLOJA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'pCLIENTE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'pSITUACAO'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDados.sqlConexao
+    Left = 29
+    Top = 128
+  end
+  object dspAtendimento: TDataSetProvider
+    DataSet = dstAtendimentos
+    Options = [poAllowCommandText]
+    Left = 69
+    Top = 128
+  end
+  object cdsAtendimento: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'pLOJA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'pCLIENTE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'pSITUACAO'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspAtendimento'
+    Left = 109
+    Top = 128
+    object cdsAtendimentoAGE_ID: TIntegerField
+      FieldName = 'AGE_ID'
+      Required = True
+    end
+    object cdsAtendimentoAGE_CDLOJA: TIntegerField
+      FieldName = 'AGE_CDLOJA'
+    end
+    object cdsAtendimentoAGE_DTMOVI: TDateField
+      FieldName = 'AGE_DTMOVI'
+      Required = True
+    end
+    object cdsAtendimentoAGE_HOMOVI: TStringField
+      FieldName = 'AGE_HOMOVI'
+      FixedChar = True
+      Size = 5
+    end
+    object cdsAtendimentoAGE_CLIENTE: TIntegerField
+      FieldName = 'AGE_CLIENTE'
+    end
+    object cdsAtendimentoAGE_DTATENDIMENTO: TDateField
+      Alignment = taCenter
+      FieldName = 'AGE_DTATENDIMENTO'
+    end
+    object cdsAtendimentoAGE_HOATENDIMENTO: TStringField
+      Alignment = taCenter
+      FieldName = 'AGE_HOATENDIMENTO'
+      EditMask = '##:##;1;_'
+      FixedChar = True
+      Size = 5
+    end
+    object cdsAtendimentoAGE_SITUACAO: TStringField
+      FieldName = 'AGE_SITUACAO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsAtendimentoAGE_FUNCIONARIO: TIntegerField
+      FieldName = 'AGE_FUNCIONARIO'
+    end
+    object cdsAtendimentoAGE_DESCRICAO: TMemoField
+      FieldName = 'AGE_DESCRICAO'
+      BlobType = ftMemo
+    end
+    object cdsAtendimentoAGE_DIAGNOSTICO: TMemoField
+      FieldName = 'AGE_DIAGNOSTICO'
+      BlobType = ftMemo
+    end
+    object cdsAtendimentoCLI_NOME: TStringField
+      FieldName = 'CLI_NOME'
+      Required = True
+      Size = 50
+    end
+    object cdsAtendimentoFUN_NOME: TStringField
+      FieldName = 'FUN_NOME'
+      Size = 40
+    end
+  end
+  object dsAtendimento: TDataSource
+    DataSet = cdsAtendimento
+    OnDataChange = dsAtendimentoDataChange
+    Left = 149
+    Top = 128
+  end
+  object dstVendas: TSQLDataSet
+    CommandText = 
+      'select M.MOV_PEDIDO, M.MOV_LOJA, M.MOV_DATAVENDA, M.MOV_CLIENTE,' +
+      ' CL.CLI_NOME,'#13#10'M.MOV_VALOR, M.MOV_SITUACAO'#13#10'from VENDAS M'#13#10'inner' +
+      ' join CLIENTES CL ON CL.CLI_CODIGO = M.MOV_CLIENTE'#13#10'Where (M.MOV' +
+      '_CLIENTE = :pCLIENTE) AND (M.MOV_SITUACAO = '#39'F'#39')'#13#10'ORDER BY M.MOV' +
+      '_DATAVENDA'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'pCLIENTE'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDados.sqlConexao
+    Left = 29
+    Top = 167
+  end
+  object dspVendas: TDataSetProvider
+    DataSet = dstVendas
+    Options = [poAllowCommandText]
+    Left = 69
+    Top = 167
+  end
+  object cdsVendas: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'pCLIENTE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspVendas'
+    Left = 109
+    Top = 167
+    object cdsVendasMOV_PEDIDO: TIntegerField
+      Alignment = taCenter
+      FieldName = 'MOV_PEDIDO'
+      Required = True
+      DisplayFormat = '0000000'
+    end
+    object cdsVendasMOV_LOJA: TIntegerField
+      FieldName = 'MOV_LOJA'
+      Required = True
+    end
+    object cdsVendasMOV_DATAVENDA: TDateField
+      FieldName = 'MOV_DATAVENDA'
+      Required = True
+    end
+    object cdsVendasMOV_CLIENTE: TIntegerField
+      FieldName = 'MOV_CLIENTE'
+    end
+    object cdsVendasCLI_NOME: TStringField
+      FieldName = 'CLI_NOME'
+      Required = True
+      Size = 50
+    end
+    object cdsVendasMOV_VALOR: TFMTBCDField
+      FieldName = 'MOV_VALOR'
+      DisplayFormat = '###,##0.#0'
+      EditFormat = '###,##0.#0'
+      Precision = 18
+      Size = 2
+    end
+    object cdsVendasMOV_SITUACAO: TStringField
+      FieldName = 'MOV_SITUACAO'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object dsVendas: TDataSource
+    DataSet = cdsVendas
+    OnDataChange = dsVendasDataChange
+    Left = 157
+    Top = 167
+  end
+  object dstItensVenda: TSQLDataSet
+    CommandText = 
+      'Select VI.MOP_PEDIDO, VI.MOP_NRITEM, VI.MOP_PRODUTO, P.PRO_DESCR' +
+      'ICAO'#13#10',VI.MOP_QUANTIDADE,'#13#10'VI.MOP_UNIDADE, VI.MOP_VALOR from VEN' +
+      'DAS_ITENS VI'#13#10'inner join PRODUTOS P ON P.PRO_CODIGO = VI.MOP_PRO' +
+      'DUTO'#13#10'Where (VI.MOP_PEDIDO = :pPEDIDO)'#13#10'order by MOP_NRITEM'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'pPEDIDO'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDados.sqlConexao
+    Left = 397
+    Top = 382
+  end
+  object dspItensVenda: TDataSetProvider
+    DataSet = dstItensVenda
+    Options = [poAllowCommandText]
+    Left = 429
+    Top = 382
+  end
+  object cdsItensVenda: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'pPEDIDO'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspItensVenda'
+    OnCalcFields = cdsItensVendaCalcFields
+    Left = 469
+    Top = 382
+    object cdsItensVendaMOP_PEDIDO: TIntegerField
+      FieldName = 'MOP_PEDIDO'
+      Required = True
+    end
+    object cdsItensVendaMOP_NRITEM: TIntegerField
+      FieldName = 'MOP_NRITEM'
+      Required = True
+      DisplayFormat = '000'
+    end
+    object cdsItensVendaMOP_PRODUTO: TStringField
+      FieldName = 'MOP_PRODUTO'
+      Required = True
+      FixedChar = True
+      Size = 13
+    end
+    object cdsItensVendaPRO_DESCRICAO: TStringField
+      FieldName = 'PRO_DESCRICAO'
+      Required = True
+      Size = 60
+    end
+    object cdsItensVendaMOP_QUANTIDADE: TFMTBCDField
+      FieldName = 'MOP_QUANTIDADE'
+      Precision = 18
+      Size = 3
+    end
+    object cdsItensVendaMOP_UNIDADE: TStringField
+      FieldName = 'MOP_UNIDADE'
+      FixedChar = True
+      Size = 2
+    end
+    object cdsItensVendaMOP_VALOR: TFMTBCDField
+      FieldName = 'MOP_VALOR'
+      DisplayFormat = '###,##0.#0'
+      EditFormat = '###,##0.#0'
+      Precision = 18
+      Size = 2
+    end
+    object cdsItensVendaSUB_TOTAL: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'SUB_TOTAL'
+      DisplayFormat = '###,##0.#0'
+      EditFormat = '###,##0.#0'
+      Calculated = True
+    end
+  end
+  object dsItensVenda: TDataSource
+    DataSet = cdsItensVenda
+    Left = 509
+    Top = 382
+  end
+end

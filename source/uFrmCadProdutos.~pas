@@ -1,0 +1,385 @@
+unit uFrmCadProdutos;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, uFrmCadastro, FMTBcd, SqlExpr, DB, DBClient, Provider, ComCtrls,
+  Grids, DBGrids, Buttons, StdCtrls, ExtCtrls, DBCtrls, Mask, ToolEdit,
+  RXDBCtrl;
+
+type
+  TfrmCadProdutos = class(TfrmCadastro)
+    Label2: TLabel;
+    dbeDescricao: TDBEdit;
+    Label3: TLabel;
+    dbeReferencia: TDBEdit;
+    Label4: TLabel;
+    cmbFornecedor: TDBLookupComboBox;
+    Label5: TLabel;
+    cmbUND: TDBLookupComboBox;
+    Label6: TLabel;
+    dbeVLCOMP: TDBEdit;
+    Label7: TLabel;
+    dbeVLVEND: TDBEdit;
+    DBDateEdit1: TDBDateEdit;
+    Label8: TLabel;
+    DBMemo1: TDBMemo;
+    Label9: TLabel;
+    cdsConsultarPRO_CODIGO: TStringField;
+    cdsConsultarPRO_REFERENCIA: TStringField;
+    cdsConsultarPRO_DESCRICAO: TStringField;
+    cdsConsultarPRO_VLVENDA: TFMTBCDField;
+    DBRadioGroup1: TDBRadioGroup;
+    Panel1: TPanel;
+    sbUlti: TSpeedButton;
+    sbProx: TSpeedButton;
+    sbAnte: TSpeedButton;
+    spPrim: TSpeedButton;
+    dstNavegacao: TSQLDataSet;
+    dspNavegacao: TDataSetProvider;
+    cdsNavegavacao: TClientDataSet;
+    dsNavegacao: TDataSource;
+    cdsNavegavacaoPRO_CODIGO: TStringField;
+    cdsNavegavacaoPRO_DESCRICAO: TStringField;
+    procedure FormShow(Sender: TObject);
+    procedure BtAdicionarClick(Sender: TObject);
+    procedure BtEditarClick(Sender: TObject);
+    procedure dbeReferenciaExit(Sender: TObject);
+    procedure BtExcluirClick(Sender: TObject);
+    procedure BtGravarClick(Sender: TObject);
+    procedure edtConsultarChange(Sender: TObject);
+    procedure btnConsultarClick(Sender: TObject);
+    procedure rgConsultarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure dsNavegacaoDataChange(Sender: TObject; Field: TField);
+    procedure sbPrimeiroClick(Sender: TObject);
+    procedure sbAnteriorClick(Sender: TObject);
+    procedure sbProximoClick(Sender: TObject);
+    procedure sbUltimoClick(Sender: TObject);
+  private
+    { Private declarations }
+    novo, alterar, apagar : String;
+    procedure Registro;
+    procedure Buscar(aCodigo : String);
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadProdutos: TfrmCadProdutos;
+
+implementation
+
+uses udmDados, uFrmMain, uFuncoes;
+
+{$R *.dfm}
+
+procedure TfrmCadProdutos.Buscar(aCodigo : String);
+begin
+     uFuncoes.FilterCDS(DMDados.cdsProduto, fsString, aCodigo);
+end;
+
+procedure TfrmCadProdutos.FormShow(Sender: TObject);
+begin
+  inherited;
+    uFuncoes.RefreshCDS(dmDados.cdsListaUnidades);
+    uFuncoes.RefreshCDS(dmDados.cdsListaFornecedores);
+    //
+    uFuncoes.RefreshCDS(cdsNavegavacao);
+    //
+    REGISTRO;
+    //
+    If (dmDados.cdsProduto.IsEmpty) Then
+        BtAdicionarClick(Sender);
+end;
+
+procedure TfrmCadProdutos.Registro;
+begin
+     dmDados.AbrirTabelaConfig();
+     //
+     If (dmDados.cdsConfigCFG_PRODUTO.AsInteger > 0) Then
+         uFuncoes.FilterCDS(DMDados.cdsProduto, fsString, uFuncoes.mscodigo('PRO_CODIGO','PRODUTOS'))
+     Else
+         uFuncoes.FilterCDS(DMDados.cdsProduto, fsString, '-1');
+     //
+     PageControl1.ActivePageIndex := 0;
+end;
+
+procedure TfrmCadProdutos.BtAdicionarClick(Sender: TObject);
+begin
+  inherited;
+    If (dsCadastro.DataSet.State in [dsBrowse]) Then
+     begin
+          DMDados.AbrirTabelaConfig;
+          With dsCadastro.DataSet do
+            begin
+                 Append;
+                 FieldByName('PRO_CODIGO').AsString  :=
+                    uFuncoes.StrZero(InttoStr(
+                    DMDados.cdsConfigCFG_PRODUTO.AsInteger + 1),13);
+                 FieldByName('PRO_DTCADASTRO').AsDateTime := M_DTMOVI;
+                 FieldByName('PRO_HOCADA').AsString       := M_HOMOVI;
+                 FieldByName('PRO_USUARIO_CAD').AsInteger := StrtoInt(uFrmMain.M_CDUSUA);
+                 FieldByName('PRO_FLPROD').AsString       := 'P';
+            End;
+            //
+            dbeDescricao.SetFocus;
+     End;
+end;
+
+procedure TfrmCadProdutos.BtEditarClick(Sender: TObject);
+begin
+  inherited;
+    if  not (dsCadastro.DataSet.IsEmpty) and (dsCadastro.DataSet.RecordCount > 0) then
+      Begin
+           dsCadastro.DataSet.Edit;
+           dsCadastro.DataSet.FieldByName('PRO_DTALTERACAO').AsDateTime := M_DTMOVI;
+           dsCadastro.DataSet.FieldByName('PRO_HOALTE').AsString        := M_HOMOVI;
+           dsCadastro.DataSet.FieldByName('PRO_USUARIO_ALT').AsInteger  := StrtoInt(uFrmMain.M_CDUSUA);
+           dbeDescricao.setfocus;
+      End;
+end;
+
+procedure TfrmCadProdutos.dbeReferenciaExit(Sender: TObject);
+begin
+  inherited;
+      If (dsCadastro.DataSet.State in [dsInsert])
+        and not uFuncoes.Empty(dbeReferencia.Text) Then
+          If (dmDados.ProcurarValor(dbeReferencia.Text, 'PRO_REFERENCIA', 'PRODUTOS')) Then
+            begin
+                 dbeReferencia.SetFocus;
+                 MessageDlg('Referência já cadastrada.', mtInformation, [mbOk], 0);
+                 Exit;
+            End;
+end;
+
+procedure TfrmCadProdutos.BtExcluirClick(Sender: TObject);
+begin
+  inherited;
+   if  not (dsCadastro.DataSet.IsEmpty) and (dsCadastro.DataSet.RecordCount > 0) then
+   begin
+       //
+       If Application.MessageBox('Deseja excluir este Produto?' , 'Exclusão de registro',
+                    MB_YESNO+MB_ICONQUESTION+MB_DEFBUTTON2+MB_APPLMODAL) = ID_YES Then
+       Begin
+            //
+            dmDados.cdsProduto.Delete;
+            dmDados.cdsProduto.ApplyUpdates(0);
+            //
+            REGISTRO;
+       end
+       else
+            Application.MessageBox('Não ha registro a ser excluido','ATENÇÃO',
+              MB_OK+MB_ICONINFORMATION+MB_APPLMODAL);
+   End;
+end;
+
+procedure TfrmCadProdutos.BtGravarClick(Sender: TObject);
+begin
+     If uFuncoes.Empty(dbeDescricao.Text) Then
+       Begin
+           Application.MessageBox('Digite a descrição do produto.','ATENÇÃO',
+               MB_OK+MB_ICONINFORMATION+MB_APPLMODAL);
+           dbeDescricao.SetFocus;
+           Exit;
+       End;
+      //
+     If uFuncoes.Empty(cmbFornecedor.Text) Then
+       Begin
+           Application.MessageBox('Selecione o fornecedor.','ATENÇÃO',
+               MB_OK+MB_ICONINFORMATION+MB_APPLMODAL);
+           cmbFornecedor.SetFocus;
+           Exit;
+       End;
+      //
+     If uFuncoes.Empty(cmbUND.Text) Then
+       Begin
+           Application.MessageBox('Selecione a unidade.','ATENÇÃO',
+               MB_OK+MB_ICONINFORMATION+MB_APPLMODAL);
+           cmbUND.SetFocus;
+           Exit;
+       End;
+      //
+     If uFuncoes.Empty(dbeVLCOMP.Text) Then
+       Begin
+           Application.MessageBox('Digite o valor de compra.','ATENÇÃO',
+               MB_OK+MB_ICONINFORMATION+MB_APPLMODAL);
+           dbeVLCOMP.SetFocus;
+           Exit;
+       End;
+      //
+     If uFuncoes.Empty(dbeVLVEND.Text) Then
+       Begin
+           Application.MessageBox('Digite o valor de venda.','ATENÇÃO',
+               MB_OK+MB_ICONINFORMATION+MB_APPLMODAL);
+           dbeVLVEND.SetFocus;
+           Exit;
+       End;
+      //
+      try
+          //
+          dmDados.Start;
+          //
+          If (dsCadastro.DataSet.State in [dsInsert]) Then
+            begin
+                 DMDados.AbrirTabelaConfig;
+                 //
+                 dmDados.cdsConfig.Edit;
+                 dmDados.cdsConfigCFG_PRODUTO.AsInteger :=
+                   dmDados.cdsConfigCFG_PRODUTO.AsInteger + 1;
+                 dmDados.cdsConfig.ApplyUpdates(0);
+                 dmDados.cdsProdutoPRO_CODIGO.AsString :=
+                    uFuncoes.StrZero(dmDados.cdsConfigCFG_PRODUTO.AsString,13);
+                 //
+            End;
+          //
+          dsCadastro.DataSet.Post;
+          DMDados.cdsProduto.ApplyUpdates(0);
+          //
+          dmDados.Comit(udmDados.Transc);
+          //
+          Application.MessageBox(PChar(MSG_OK),
+              'ATENÇÃO', MB_OK+MB_ICONINFORMATION+MB_APPLMODAL);
+     Except
+          on Exc:Exception do
+            begin
+               Application.MessageBox(PChar(MSG_ERRO+#13+Exc.Message),
+                 'Erro', MB_OK+MB_ICONSTOP+MB_APPLMODAL);
+               BtCancelarClick(Sender);
+               //
+               dmDados.Rollback;
+            End;
+     End;
+  inherited;
+end;
+
+procedure TfrmCadProdutos.edtConsultarChange(Sender: TObject);
+Var
+  aTexto : String;
+begin
+   If not uFuncoes.Empty(edtConsultar.Text) Then
+    begin
+        aTexto := 'select PRO_CODIGO, PRO_REFERENCIA, PRO_DESCRICAO, PRO_VLVENDA from PRODUTOS ';
+        cdsConsultar.Close;
+        with datasetConsultar do
+        begin
+            Active := False;
+            CommandText := aTexto;
+            case rgConsultar.ItemIndex of
+                0: CommandText := CommandText + ' Where (PRO_CODIGO = :pCODIGO)';
+                1: CommandText := CommandText + ' Where (UPPER(PRO_DESCRICAO) like :pNOME)';
+            end;
+            CommandText := CommandText + 'order by PRO_DESCRICAO ';
+            case rgConsultar.ItemIndex of
+                0: datasetConsultar.Params.ParamByName('pCODIGO').AsString := Copy(edtConsultar.Text,1,13);
+                1: datasetConsultar.Params.ParamByName('pNOME').AsString   := Copy(edtConsultar.Text,1,49) + '%';
+            end;
+            Active := True;
+        end;
+        cdsConsultar.FetchParams;
+        cdsConsultar.Open;
+    End
+    Else
+         cdsConsultar.Close;
+  inherited;
+end;
+
+procedure TfrmCadProdutos.btnConsultarClick(Sender: TObject);
+begin
+  inherited;
+     If not (cdsConsultar.IsEmpty) Then
+     begin
+       buscar(cdsConsultarPRO_CODIGO.AsString);
+       PageControl1.ActivePageIndex := 0;
+     End;
+end;
+
+procedure TfrmCadProdutos.rgConsultarClick(Sender: TObject);
+begin
+//  inherited;
+  case rgConsultar.ItemIndex of
+    0:
+    begin
+      lblConsultar.Caption := 'Código:';
+      edtConsultar.MaxLength := 13;
+      edtConsultar.Clear;
+    end;
+    1:
+    begin
+      lblConsultar.Caption := 'Nome/Descrição:';
+      edtConsultar.Clear;
+    end;
+  end;
+  if edtConsultar.CanFocus then
+    edtConsultar.SetFocus;
+end;
+
+procedure TfrmCadProdutos.FormCreate(Sender: TObject);
+begin
+  inherited;
+   If not (UFrmMain.admin) Then
+   begin
+     //
+     novo    := UFrmMain.aNovo;
+     alterar := UFrmMain.aAlterar;
+     apagar  := UFrmMain.aApagar;
+     //
+     If Empty(novo) or Empty(alterar) or Empty(apagar) Then
+     begin
+           dmDados.Verificar_Direito_Acesso(
+            Strtoint(UFrmMain.M_CDUSUA), DmDados.GetCodMenu('Produtos...'));
+           //
+           novo    := UFrmMain.aNovo;
+           alterar := UFrmMain.aAlterar;
+           apagar  := UFrmMain.aApagar;
+           //
+     End;
+     //
+     FrmMain.Limpar_Acessos;
+     //
+     BtAdicionar.Visible := (novo = 'S');
+     BtEditar.Visible    := (alterar = 'S');
+     BtExcluir.Visible   := (apagar = 'S');
+  End;
+end;
+
+procedure TfrmCadProdutos.dsNavegacaoDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+  spPrim.Enabled := (((Sender as TDataSource).DataSet.Active) and not (Sender as TDataSource).DataSet.IsEmpty) and not ((Sender as TDataSource).DataSet.Bof);
+  sbAnte.Enabled := spPrim.Enabled;
+  sbUlti.Enabled := (((Sender as TDataSource).DataSet.Active) and not (Sender as TDataSource).DataSet.IsEmpty) and not ((Sender as TDataSource).DataSet.Eof);
+  sbProx.Enabled := sbUlti.Enabled;
+end;
+
+procedure TfrmCadProdutos.sbPrimeiroClick(Sender: TObject);
+begin
+  inherited;
+     If (cdsNavegavacao.Active) Then
+        dsNavegacao.DataSet.First;
+end;
+
+procedure TfrmCadProdutos.sbAnteriorClick(Sender: TObject);
+begin
+  inherited;
+     If (cdsNavegavacao.Active) Then
+        dsNavegacao.DataSet.Prior;
+end;
+
+procedure TfrmCadProdutos.sbProximoClick(Sender: TObject);
+begin
+  inherited;
+     If (cdsNavegavacao.Active) Then
+        dsNavegacao.DataSet.Next;
+end;
+
+procedure TfrmCadProdutos.sbUltimoClick(Sender: TObject);
+begin
+  inherited;
+     If (cdsNavegavacao.Active) Then
+        dsNavegacao.DataSet.Last;
+end;
+
+end.

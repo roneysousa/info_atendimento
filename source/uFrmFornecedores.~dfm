@@ -1,0 +1,516 @@
+inherited frmCadFornecedores: TfrmCadFornecedores
+  Caption = 'Cadastro de Fornecedores'
+  ClientHeight = 485
+  ClientWidth = 632
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited PageControl1: TPageControl
+    Width = 632
+    Height = 466
+    ActivePage = TabSheet1
+    inherited TabSheet1: TTabSheet
+      inherited DBText1: TDBText
+        DataField = 'FOR_CODIGO'
+      end
+      object Label2: TLabel [2]
+        Left = 16
+        Top = 56
+        Width = 63
+        Height = 13
+        Caption = 'Raz'#227'o Social'
+        FocusControl = dbeRazao
+        Transparent = True
+      end
+      object Label3: TLabel [3]
+        Left = 16
+        Top = 96
+        Width = 40
+        Height = 13
+        Caption = 'Fantasia'
+        FocusControl = dbeFantasia
+        Transparent = True
+      end
+      object Label4: TLabel [4]
+        Left = 384
+        Top = 96
+        Width = 27
+        Height = 13
+        Caption = 'CNPJ'
+        FocusControl = dbeCNPJ
+        Transparent = True
+      end
+      object Label5: TLabel [5]
+        Left = 16
+        Top = 136
+        Width = 54
+        Height = 13
+        Caption = 'Logradouro'
+        FocusControl = DBEdit4
+        Transparent = True
+      end
+      object Label6: TLabel [6]
+        Left = 479
+        Top = 136
+        Width = 37
+        Height = 13
+        Caption = 'N'#250'mero'
+        FocusControl = DBEdit5
+        Transparent = True
+      end
+      object Label7: TLabel [7]
+        Left = 16
+        Top = 176
+        Width = 33
+        Height = 13
+        Caption = 'Cidade'
+        FocusControl = DBEdit6
+        Transparent = True
+      end
+      object Label10: TLabel [8]
+        Left = 195
+        Top = 176
+        Width = 14
+        Height = 13
+        Caption = 'UF'
+        Transparent = True
+      end
+      object Label8: TLabel [9]
+        Left = 249
+        Top = 176
+        Width = 27
+        Height = 13
+        Caption = 'Bairro'
+        FocusControl = DBEdit7
+        Transparent = True
+      end
+      object Label9: TLabel [10]
+        Left = 479
+        Top = 176
+        Width = 21
+        Height = 13
+        Caption = 'CEP'
+        FocusControl = DBEdit8
+        Transparent = True
+      end
+      object Label11: TLabel [11]
+        Left = 16
+        Top = 216
+        Width = 51
+        Height = 13
+        Caption = 'Telefone 1'
+        FocusControl = DBEdit9
+        Transparent = True
+      end
+      object Label12: TLabel [12]
+        Left = 156
+        Top = 216
+        Width = 51
+        Height = 13
+        Caption = 'Telefone 2'
+        FocusControl = DBEdit10
+      end
+      object Label13: TLabel [13]
+        Left = 296
+        Top = 216
+        Width = 20
+        Height = 13
+        Caption = 'FAX'
+        FocusControl = DBEdit11
+        Transparent = True
+      end
+      object Label14: TLabel [14]
+        Left = 16
+        Top = 256
+        Width = 92
+        Height = 13
+        Caption = 'Nome do Contato 1'
+        FocusControl = DBEdit12
+        Transparent = True
+      end
+      object Label15: TLabel [15]
+        Left = 296
+        Top = 256
+        Width = 28
+        Height = 13
+        Caption = 'Cargo'
+        FocusControl = DBEdit13
+        Transparent = True
+      end
+      object Label16: TLabel [16]
+        Left = 480
+        Top = 256
+        Width = 24
+        Height = 13
+        Caption = 'Fone'
+        FocusControl = DBEdit14
+        Transparent = True
+      end
+      object Label17: TLabel [17]
+        Left = 16
+        Top = 296
+        Width = 92
+        Height = 13
+        Caption = 'Nome do Contato 2'
+        FocusControl = DBEdit15
+        Transparent = True
+      end
+      object Label18: TLabel [18]
+        Left = 296
+        Top = 296
+        Width = 28
+        Height = 13
+        Caption = 'Cargo'
+        FocusControl = DBEdit16
+        Transparent = True
+      end
+      object Label19: TLabel [19]
+        Left = 480
+        Top = 296
+        Width = 24
+        Height = 13
+        Caption = 'Fone'
+        FocusControl = DBEdit17
+        Transparent = True
+      end
+      object Label20: TLabel [20]
+        Left = 16
+        Top = 336
+        Width = 25
+        Height = 13
+        Caption = 'Email'
+        FocusControl = dbeEmail
+        Transparent = True
+      end
+      inherited pnlBotoes: TPanel
+        Top = 397
+        Width = 624
+      end
+      object dbeRazao: TDBEdit
+        Left = 16
+        Top = 72
+        Width = 545
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'FOR_RAZAO'
+        DataSource = dsCadastro
+        TabOrder = 1
+        OnExit = dbeRazaoExit
+      end
+      object dbeFantasia: TDBEdit
+        Left = 16
+        Top = 112
+        Width = 361
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'FOR_FANTASIA'
+        DataSource = dsCadastro
+        TabOrder = 2
+      end
+      object dbeCNPJ: TDBEdit
+        Left = 384
+        Top = 112
+        Width = 176
+        Height = 21
+        DataField = 'FOR_CNPJ'
+        DataSource = dsCadastro
+        TabOrder = 3
+      end
+      object DBEdit4: TDBEdit
+        Left = 16
+        Top = 152
+        Width = 457
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'FOR_ENDERECO'
+        DataSource = dsCadastro
+        TabOrder = 4
+      end
+      object DBEdit5: TDBEdit
+        Left = 479
+        Top = 152
+        Width = 81
+        Height = 21
+        DataField = 'FOR_NUMERO'
+        DataSource = dsCadastro
+        TabOrder = 5
+      end
+      object DBEdit6: TDBEdit
+        Left = 16
+        Top = 192
+        Width = 168
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'FOR_CIDADE'
+        DataSource = dsCadastro
+        TabOrder = 6
+      end
+      object cmbUF: TDBComboBox
+        Left = 193
+        Top = 191
+        Width = 49
+        Height = 22
+        Style = csOwnerDrawFixed
+        CharCase = ecUpperCase
+        DataField = 'FOR_UF'
+        DataSource = dsCadastro
+        ItemHeight = 16
+        Items.Strings = (
+          'AC'
+          'AL'
+          'AM'
+          'AP'
+          'BA'
+          'CE'
+          'DF'
+          'ES'
+          'GO'
+          'MA'
+          'MG'
+          'MS'
+          'MT'
+          'PA'
+          'PE'
+          'PR'
+          'PI'
+          'RJ'
+          'RN'
+          'RO'
+          'RR'
+          'RS'
+          'SC'
+          'SE'
+          'SP'
+          'TO')
+        TabOrder = 7
+      end
+      object DBEdit7: TDBEdit
+        Left = 249
+        Top = 192
+        Width = 224
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'FOR_BAIRRO'
+        DataSource = dsCadastro
+        TabOrder = 8
+      end
+      object DBEdit8: TDBEdit
+        Left = 479
+        Top = 192
+        Width = 81
+        Height = 21
+        DataField = 'FOR_CEP'
+        DataSource = dsCadastro
+        TabOrder = 9
+      end
+      object DBEdit9: TDBEdit
+        Left = 16
+        Top = 232
+        Width = 134
+        Height = 21
+        DataField = 'FOR_FONE1'
+        DataSource = dsCadastro
+        TabOrder = 10
+      end
+      object DBEdit10: TDBEdit
+        Left = 156
+        Top = 232
+        Width = 132
+        Height = 21
+        DataField = 'FOR_FONE2'
+        DataSource = dsCadastro
+        TabOrder = 11
+      end
+      object DBEdit11: TDBEdit
+        Left = 296
+        Top = 232
+        Width = 134
+        Height = 21
+        DataField = 'FOR_FAX'
+        DataSource = dsCadastro
+        TabOrder = 12
+      end
+      object DBEdit12: TDBEdit
+        Left = 16
+        Top = 272
+        Width = 272
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'FOR_CONTATO1'
+        DataSource = dsCadastro
+        TabOrder = 13
+      end
+      object DBEdit13: TDBEdit
+        Left = 296
+        Top = 272
+        Width = 178
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'FOR_CARGO1'
+        DataSource = dsCadastro
+        TabOrder = 14
+      end
+      object DBEdit14: TDBEdit
+        Left = 480
+        Top = 272
+        Width = 81
+        Height = 21
+        DataField = 'FOR_FONECON1'
+        DataSource = dsCadastro
+        TabOrder = 15
+      end
+      object DBEdit15: TDBEdit
+        Left = 16
+        Top = 312
+        Width = 272
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'FOR_CONTATO2'
+        DataSource = dsCadastro
+        TabOrder = 16
+      end
+      object DBEdit16: TDBEdit
+        Left = 296
+        Top = 312
+        Width = 178
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'FOR_CARGO2'
+        DataSource = dsCadastro
+        TabOrder = 17
+      end
+      object DBEdit17: TDBEdit
+        Left = 480
+        Top = 312
+        Width = 81
+        Height = 21
+        DataField = 'FOR_FONECON2'
+        DataSource = dsCadastro
+        TabOrder = 18
+      end
+      object dbeEmail: TDBEdit
+        Left = 16
+        Top = 352
+        Width = 545
+        Height = 21
+        CharCase = ecLowerCase
+        DataField = 'FOR_EMAIL'
+        DataSource = dsCadastro
+        TabOrder = 19
+      end
+    end
+    inherited TabSheet2: TTabSheet
+      inherited pnlProcurar: TPanel
+        Width = 624
+        inherited btnConsultar: TBitBtn
+          OnClick = btnConsultarClick
+        end
+      end
+      inherited Panel3: TPanel
+        Left = 590
+        Height = 365
+      end
+      inherited grdConsultar: TDBGrid
+        Width = 590
+        Height = 365
+        OnDblClick = btnConsultarClick
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'FOR_CODIGO'
+            Title.Caption = 'C'#243'digo'
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Verdana'
+            Title.Font.Style = [fsBold]
+            Width = 51
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FOR_RAZAO'
+            Title.Caption = 'Raz'#227'o Social'
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Verdana'
+            Title.Font.Style = [fsBold]
+            Width = 233
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FOR_FANTASIA'
+            Title.Caption = 'Fantasia'
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Verdana'
+            Title.Font.Style = [fsBold]
+            Width = 183
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FOR_FONE1'
+            Title.Alignment = taRightJustify
+            Title.Caption = 'Telefone'
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Verdana'
+            Title.Font.Style = [fsBold]
+            Width = 78
+            Visible = True
+          end>
+      end
+    end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 466
+    Width = 632
+  end
+  inherited dsConsultar: TDataSource
+    Left = 292
+    Top = 34
+  end
+  inherited dspConsultar: TDataSetProvider
+    Left = 452
+    Top = 34
+  end
+  inherited cdsConsultar: TClientDataSet
+    Left = 524
+    Top = 34
+    object cdsConsultarFOR_CODIGO: TIntegerField
+      FieldName = 'FOR_CODIGO'
+      Required = True
+      DisplayFormat = '00000'
+    end
+    object cdsConsultarFOR_RAZAO: TStringField
+      FieldName = 'FOR_RAZAO'
+      Required = True
+      Size = 50
+    end
+    object cdsConsultarFOR_FONE1: TStringField
+      Alignment = taRightJustify
+      FieldName = 'FOR_FONE1'
+      EditMask = '(99) 9999-9999;0;_'
+      Size = 10
+    end
+    object cdsConsultarFOR_FANTASIA: TStringField
+      FieldName = 'FOR_FANTASIA'
+      Required = True
+      Size = 50
+    end
+  end
+  inherited dsCadastro: TDataSource
+    DataSet = dmDados.cdsFornecedor
+  end
+  inherited datasetConsultar: TSQLDataSet
+    CommandText = 
+      'select FOR_CODIGO, FOR_RAZAO, FOR_FANTASIA, FOR_FONE1 from FORNE' +
+      'CEDORES'
+    Left = 364
+    Top = 32
+  end
+end

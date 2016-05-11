@@ -1,0 +1,137 @@
+unit FrmConfig;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, DB, StdCtrls, Mask, DBCtrls, Buttons, ExtDlgs;
+
+type
+  TfrmConfiguracoes = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Label1: TLabel;
+    dbeRazao: TDBEdit;
+    dsCadastro: TDataSource;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    Label3: TLabel;
+    DBEdit3: TDBEdit;
+    Label4: TLabel;
+    DBEdit4: TDBEdit;
+    Label5: TLabel;
+    DBEdit5: TDBEdit;
+    Label6: TLabel;
+    DBEdit6: TDBEdit;
+    Label13: TLabel;
+    DBComboBox1: TDBComboBox;
+    Label7: TLabel;
+    DBEdit7: TDBEdit;
+    Label8: TLabel;
+    DBEdit8: TDBEdit;
+    Label9: TLabel;
+    DBEdit9: TDBEdit;
+    BtEditar: TBitBtn;
+    BtGravar: TBitBtn;
+    BtCancelar: TBitBtn;
+    BtSair: TBitBtn;
+    OpenPictureDialog1: TOpenPictureDialog;
+    Label10: TLabel;
+    imgLogo: TDBImage;
+    btnProcurar: TBitBtn;
+    Label11: TLabel;
+    DBEdit1: TDBEdit;
+    Label12: TLabel;
+    DBEdit10: TDBEdit;
+    Label14: TLabel;
+    DBEdit11: TDBEdit;
+    procedure BtSairClick(Sender: TObject);
+    procedure BtEditarClick(Sender: TObject);
+    procedure BtCancelarClick(Sender: TObject);
+    procedure BtGravarClick(Sender: TObject);
+    procedure btnProcurarClick(Sender: TObject);
+    procedure dsCadastroDataChange(Sender: TObject; Field: TField);
+  private
+    { Private declarations }
+     procedure tratabotoes;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmConfiguracoes: TfrmConfiguracoes;
+
+implementation
+
+uses udmDados;
+
+{$R *.dfm}
+
+procedure TfrmConfiguracoes.BtSairClick(Sender: TObject);
+begin
+     Close;
+end;
+
+procedure TfrmConfiguracoes.BtEditarClick(Sender: TObject);
+begin
+    if  not (dsCadastro.DataSet.IsEmpty) and (dsCadastro.DataSet.RecordCount > 0) then
+      Begin
+           dsCadastro.DataSet.Edit;
+           dbeRazao.setfocus;
+      End;
+    //
+    tratabotoes;
+end;
+
+procedure TfrmConfiguracoes.BtCancelarClick(Sender: TObject);
+begin
+     tratabotoes;
+     If (dsCadastro.DataSet.State in [dsInsert, dsEdit]) Then
+         dsCadastro.DataSet.Cancel;
+     if (dsCadastro.DataSet.IsEmpty) Then
+         Close;
+end;
+
+procedure TfrmConfiguracoes.BtGravarClick(Sender: TObject);
+begin
+    If (dsCadastro.DataSet.State in [dsInsert, dsEdit]) Then
+         dmDados.cdsConfig.ApplyUpdates(0);
+    //
+    tratabotoes;     
+end;
+
+procedure TfrmConfiguracoes.tratabotoes;
+begin
+   BtEditar.Enabled    := not BtEditar.Enabled;
+   //
+   BtCancelar.Enabled  := not BtCancelar.Enabled;
+   BtGravar.Enabled    := not BtGravar.Enabled;
+   BtSair.Enabled      := not BtSair.Enabled;
+end;
+
+procedure TfrmConfiguracoes.btnProcurarClick(Sender: TObject);
+begin
+    If (dsCadastro.DataSet.State in [dsEdit]) Then
+    Begin
+       Try
+            If (OpenPictureDialog1.Execute) Then
+               imgLogo.Picture.LoadFromFile(OpenPictureDialog1.FileName);
+       Except
+          on Exc:Exception do
+          begin
+             Application.MessageBox(PChar('Error ao tentar abrir imagem!!!'+#13
+                      + Exc.Message),
+                      'ATENÇÃO', MB_OK+MB_ICONINFORMATION+MB_APPLMODAL);
+          End;
+       End;
+    End;
+end;
+
+procedure TfrmConfiguracoes.dsCadastroDataChange(Sender: TObject;
+  Field: TField);
+begin
+     btnProcurar.Enabled := dsCadastro.DataSet.State in [dsEdit];
+     imgLogo.Enabled     := dsCadastro.DataSet.State in [dsEdit];
+end;
+
+end.
